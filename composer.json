@@ -1,0 +1,8 @@
+{
+    "name": "munkireport/localadmin",
+    "description": "Localadmin module for munkireport.",
+    "license": "MIT",
+    "require": {
+        "php":"^7.0"
+    }
+}
