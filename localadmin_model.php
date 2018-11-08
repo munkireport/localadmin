@@ -8,6 +8,7 @@ class Localadmin_model extends \Model
         $this->rs['id'] = '';
         $this->rs['serial_number'] = $serial;
         $this->rs['users'] = '';
+        $this->rs['user_count'] = 0;
 
         if ($serial) {
             $this->retrieve_record($serial);
@@ -24,24 +25,22 @@ class Localadmin_model extends \Model
         //Check if config threshold is set for number of admins to show
         $threshold=2;
         if(conf('local_admin_threshold') != '') {
-            $threshold=conf('local_admin_threshold');
+            $threshold = (int) conf('local_admin_threshold');
         }
         $filter = get_machine_group_filter();
         $sql = "SELECT machine.serial_number, computer_name,
-                    LENGTH(users) - LENGTH(REPLACE(users, ' ', '')) + 1 AS count,
+                    user_count AS count,
                     users
                     FROM localadmin
                     LEFT JOIN machine USING (serial_number)
                     LEFT JOIN reportdata USING (serial_number)
                     $filter
-                    AND localadmin.users LIKE '%'
+                    AND user_count >= $threshold
                     ORDER BY count DESC";
 
         foreach ($this->query($sql) as $obj) {
-            if ($obj->count >= $threshold) {
                 $obj->users = $obj->users ? $obj->users : 'Unknown';
                 $out[] = $obj;
-            }
         }
         return $out;
      }
@@ -55,6 +54,9 @@ class Localadmin_model extends \Model
     public function process($data)
     {
         $this->users = trim($data);
+        // Match words not enclosed in ()
+        $this->user_count = preg_match_all('/\w+(?![^\(]*\))/', $this->users);
         $this->save();
     }
 }
+
