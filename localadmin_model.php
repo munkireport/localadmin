@@ -15,6 +15,9 @@ class Localadmin_model extends \Model
         }
 
         $this->serial = $serial;
+        
+        // Add local config
+        configAppendFile(__DIR__ . '/config.php');
     }
 
     // ------------------------------------------------------------------------
