@@ -11,7 +11,6 @@
         <tr>
             <th data-i18n="user.local_admins"></th><td class="mr-users"></td>
         </tr>
-        </tr>
     </table>
 </div>
 
