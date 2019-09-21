@@ -1,6 +1,9 @@
 <?php
 
 return array(
+    'detail_widgets' => [
+        'localadmin_detail' => ['view' => 'localadmin_detail_widget'],
+    ],
     'listings' => array(
         'localadmin' => array('view' => 'localadmin', 'i18n' => 'localadmin.localadmin',),
     ),
