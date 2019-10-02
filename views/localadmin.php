@@ -2,7 +2,7 @@
 
 $this->view('listings/default',
 [
-  "i18n_title" => 'ard.listing.title',
+  "i18n_title" => 'localadmin.title',
   "table" => [
     [
       "column" => "machine.computer_name",
