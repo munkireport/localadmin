@@ -26,6 +26,16 @@ class Localadmin_controller extends Module_controller
         echo "You've loaded the localadmin module!";
     }
 
+    public function report($serial_number = '')
+    {
+        if( ! authorized_for_serial($serial_number)){
+            jsonError('Not authorized');
+        }
+
+        $localadmin = new Localadmin_model($serial_number);
+        jsonView($localadmin->rs);
+    }
+
 	/**
      * Get localadmin names for widget
      *

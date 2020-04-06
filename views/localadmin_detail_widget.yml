@@ -1,0 +1,12 @@
+type: table
+i18n_title: user.users
+icon: fa-users
+js_link: module/localadmin/js/localadmin_detail
+table:
+    - i18n_header: last_user
+      class: reportdata-long_username
+      append: (<span class="reportdata-console_user"></span>)
+    - i18n_header: localadmin.last_user_uid
+      class: reportdata-uid
+    - i18n_header: user.local_admins
+      class: localadmin-users 
